@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "Lumo",
+    "slug": "LumoApp",
+    "version": "1.0.0",
+    "scheme": "Lumo",
+    "jsEngine": "hermes",
+    "platforms": ["ios", "android"],
+    "orientation": "portrait",
+    "ios": {
+      "usesAppleSignIn": true
+    },
+    "android": {}
+  },
+  "userInterfaceStyle": "automatic"
+}
