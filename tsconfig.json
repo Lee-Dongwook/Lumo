@@ -3,6 +3,7 @@
     "strict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
+    "esModuleInterop": true,
     "paths": {
       "app/*": ["./packages/app/*"]
     },
