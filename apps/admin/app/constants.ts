@@ -1,0 +1,4 @@
+const BUCKET_NAME_EVENT_MANAGEMENT = 'event-management'
+const BUCKET_NAME_MEMO = 'memo'
+
+export { BUCKET_NAME_EVENT_MANAGEMENT, BUCKET_NAME_MEMO }
