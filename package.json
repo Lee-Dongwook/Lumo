@@ -1,0 +1,10 @@
+{
+  "name": "Lumo",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "yarn@4.9.2"
+}
