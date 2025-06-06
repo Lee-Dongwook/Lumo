@@ -47,7 +47,8 @@
     "native:build": "cd apps/expo && npx expo prebuild",
     "native:ipa": "cd apps/expo && eas build --profile preview:ios --platform ios --local",
     "native:apk": "cd apps/expo && eas build --profile preview:android --platform android --local",
-    "native:buildprod": "cd apps/expo && eas build --profile production --local"
+    "native:buildprod": "cd apps/expo && eas build --profile production --local",
+    "web": "cd apps/admin && yarn run dev"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [

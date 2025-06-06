@@ -1,0 +1,114 @@
+.custom-table {
+  .MuiPaper-root {
+    --Paper-shadow: 0px !important;
+  }
+
+  .MuiBox-root {
+    box-shadow: unset !important;
+  }
+
+  max-width: 100%;
+}
+
+/* This selector targets the editable element (excluding comments). */
+.ck-editor__editable_inline:not(.ck-comment__input *) {
+  min-height: 160px;
+  overflow-y: auto;
+}
+
+.ck-toolbar {
+  background: #f9fafb !important;
+}
+
+.ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content,
+.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+  border-color: #e5e7eb !important;
+}
+
+.MuiStack-root {
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+
+  .MuiFormControl-root {
+    width: 100%;
+  }
+
+  .custom-date-picker {
+    .MuiInputBase-root {
+      @apply h-full border-[#D1D5DB] py-1.5 pl-4;
+      .MuiInputBase-input {
+        @apply p-0;
+      }
+    }
+  }
+}
+
+// select
+
+.custom-select {
+  .MuiSelect-select {
+    padding: 0.53rem 1rem !important;
+    @apply focus:outline-none focus-visible:outline-none;
+  }
+
+  .MuiSelect-icon {
+    top: calc(50% - 0.25em);
+  }
+}
+
+.coalition-table {
+  .MuiTableCell-body {
+    &:first-child {
+      background-color: #f9fafb !important;
+    }
+  }
+}
+//.MuiStepper-alternativeLabel, .custom-stepper {
+//    justify-content: space-between;
+//
+//    .MuiStep-alternativeLabel {
+//        max-width: fit-content;
+//
+//        &:nth-child(2) {
+//            .MuiStepConnector-horizontal {
+//                left: -416.5%;
+//                right: 70%;
+//            }
+//        }
+//    }
+//}
+//.MuiStepConnector-horizontal  {
+//    left: -657%;
+//    right: 70%;
+//    z-index: 1;
+//
+//}
+
+// Food type
+
+.food-type-tabs {
+  .MuiTabs-flexContainer {
+    @apply justify-between;
+
+    button {
+      width: calc(100% / 3);
+    }
+
+    .Mui-selected {
+      @apply border-0 bg-white text-[#00B5E0];
+    }
+  }
+}
+
+.food-type-search {
+  .MuiInputLabel-root {
+    top: -20%;
+  }
+  .MuiInputBase-root {
+    @apply h-10;
+  }
+  .MuiAutocomplete-clearIndicator {
+    right: 100%;
+  }
+}

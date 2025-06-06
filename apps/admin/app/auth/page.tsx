@@ -4,7 +4,7 @@ import { login, loginOAuth, signup } from './actions'
 const AuthPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      {/* <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4">
         <input
           className="border p-2"
           id="email"
@@ -34,7 +34,7 @@ const AuthPage = () => {
         >
           Sign up
         </button>
-      </form> */}
+      </form>
 
       <form>
         <button
