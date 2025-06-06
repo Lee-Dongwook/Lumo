@@ -1,0 +1,71 @@
+{
+  "name": "functions",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,tsx}": "eslint --fix",
+    "**/*.{js,ts,tsx,json,css,md}": "prettier --write"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "lib/src/index.js",
+  "dependencies": {
+    "@auth/express": "^0.10.1",
+    "@aws-sdk/client-ses": "^3.825.0",
+    "@aws-sdk/client-sesv2": "^3.825.0",
+    "@sentry/cli": "^2.46.0",
+    "@sentry/google-cloud-serverless": "^9.27.0",
+    "@sentry/serverless": "^7.120.3",
+    "@supabase/supabase-js": "^2.49.10",
+    "axios": "^1.9.0",
+    "class-validator": "^0.14.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.5.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.1",
+    "expo-server-sdk": "^3.15.0",
+    "express": "^5.1.0",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^8.1.0",
+    "http-status-codes": "^2.3.0",
+    "morgan": "^1.10.0",
+    "nodemailer": "^7.0.3",
+    "openai": "^5.1.1",
+    "rrule": "^2.8.1",
+    "short-uuid": "^5.2.0",
+    "supabase": "2.24.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "@types/cookie-parser": "^1",
+    "@types/cors": "^2",
+    "@types/csurf": "^1",
+    "@types/express": "^5",
+    "@types/jest": "^29.5.14",
+    "@types/morgan": "^1",
+    "@types/node": "^22.15.30",
+    "@types/nodemailer": "^6.4.17",
+    "@types/swagger-jsdoc": "^6",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@typescript-eslint/eslint-plugin": "^8.33.1",
+    "@typescript-eslint/parser": "^8.33.1",
+    "dotenv-cli": "^8.0.0",
+    "eslint": "^9.28.0",
+    "globals": "^16.2.0",
+    "husky": "^9.1.7",
+    "jest-mock-extended": "^4.0.0-beta1",
+    "lint-staged": "^16.1.0",
+    "ts-jest": "^29.3.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.1"
+  }
+}
