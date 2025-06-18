@@ -45,7 +45,7 @@
     "native:clean:android": "cd apps/expo && npx expo prebuild --clean --platform android",
     "native:clean:ios": "cd apps/expo && npx expo prebuild --clean --platform ios",
     "native:build": "cd apps/expo && npx expo prebuild",
-    "open:xcode": "cd apps/expo/ios && open Lumo.xcworkspace",
+    "open:xcode": "cd apps/expo/ios && open lumo.xcworkspace",
     "native:ipa": "cd apps/expo && eas build --profile preview:ios --platform ios --local",
     "native:apk": "cd apps/expo && eas build --profile preview:android --platform android --local",
     "native:buildprod": "cd apps/expo && eas build --profile production --local",
@@ -65,6 +65,7 @@
     "**/expo-router/**"
   ],
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "react-native": "^0.80.0"
   }
 }
