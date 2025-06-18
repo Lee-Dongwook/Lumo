@@ -5,12 +5,18 @@
     "version": "1.0.0",
     "scheme": "Lumo",
     "jsEngine": "hermes",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "orientation": "portrait",
     "ios": {
-      "usesAppleSignIn": true
+      "usesAppleSignIn": true,
+      "bundleIdentifier": "com.leedongwook.LumoApp"
     },
-    "android": {}
+    "android": {
+      "package": "com.leedongwook.LumoApp"
+    }
   },
   "userInterfaceStyle": "automatic"
 }
