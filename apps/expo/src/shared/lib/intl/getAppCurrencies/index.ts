@@ -1,1 +1,0 @@
-export { getAppCurrencies } from './getAppCurrencies';

@@ -1,1 +1,0 @@
-export { isIos } from './islos';

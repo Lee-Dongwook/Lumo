@@ -34,16 +34,12 @@
   "scripts": {
     "prepare": "husky",
     "postinstall": "patch-package && husky",
-    "native:android": "cd apps/expo && yarn run android",
-    "native:android:release": "cd apps/expo && yarn run android:release",
-    "native:debug": "cd apps/expo && yarn run debug",
-    "native:ios": "cd apps/expo && yarn run ios",
-    "native:start": "cd apps/expo && yarn run start",
-    "native:test": "cd apps/expo && yarn run test",
-    "native:lint": "cd apps/expo && yarn run lint",
-    "native:lint:fix": "cd apps/expo && yarn run lint:fix",
-    "native:generate-app-json": "cd apps/expo && yarn run generate-app-json",
-    "open:xcode": "cd apps/expo && open ios/Lumo.xcworkspace",
+    "lumo:start": "cd apps/lumo && yarn run start",
+    "lumo:android": "cd apps/lumo && yarn run android",
+    "lumo:ios": "cd apps/lumo && yarn run ios",
+    "lumo:web": "cd apps/lumo && yarn run web",
+    "lumo:reset-project": "cd apps/lumo && yarn run reset-project",
+    "lumo:lint": "cd apps/lumo && yarn run lint",
     "web": "cd apps/admin && yarn run dev"
   },
   "lint-staged": {
@@ -60,6 +56,7 @@
     "**/expo-router/**"
   ],
   "dependencies": {
+    "expo": "^53.0.12",
     "lodash": "^4.17.21",
     "react-native": "^0.80.0"
   }

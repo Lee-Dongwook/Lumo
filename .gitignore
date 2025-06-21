@@ -87,7 +87,6 @@ build/**
 .history/
 
 .env
-.env.*
 
 
 
