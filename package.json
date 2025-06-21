@@ -43,6 +43,7 @@
     "native:lint": "cd apps/expo && yarn run lint",
     "native:lint:fix": "cd apps/expo && yarn run lint:fix",
     "native:generate-app-json": "cd apps/expo && yarn run generate-app-json",
+    "open:xcode": "cd apps/expo && open ios/Lumo.xcworkspace",
     "web": "cd apps/admin && yarn run dev"
   },
   "lint-staged": {
