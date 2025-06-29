@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.routes import router
+from api.sockets.chat import router as chat_socket_router
 
 app = FastAPI()
 
@@ -13,6 +14,7 @@ app.add_middleware(
 )
 
 app.include_router(router)
+app.include_router(chat_socket_router)
 
 @app.get("/")
 def root():

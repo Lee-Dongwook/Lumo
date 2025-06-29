@@ -1,11 +1,13 @@
-from fastapi import APIRouter, UploadFile, File, Form, Query, Depends
+from fastapi import APIRouter, UploadFile, File, Form, Depends
 from supa.client import supabase, save_request
+from supa.storage import upload_audio
 from pipelines.research_pipeline import run_research_pipeline
 from inputs.url_loader import extract_text_from_url
 from services.summarizer import summarize
 from services.citation_finder import attach_citations
 from flows.agent_loop import handle_call
 from middlewares.auth_guard import get_current_user
+import base64
 
 router = APIRouter()
 
@@ -31,6 +33,7 @@ async def analyze_file(file: UploadFile = File(...), file_type: str = Form(...),
         f.write(await file.read())
 
     result = run_research_pipeline(path, file_type)
+
     save_request(user_id=user["id"], request_type="file", content=result, source=file.filename) # type: ignore
     return {"result": result}
 
@@ -41,7 +44,10 @@ async def analyze_url(url: str = Form(...), user=Depends(get_current_user)):
     summary = summarize(text)
     result = attach_citations(summary, text)
 
-    save_request(user_id=user["id"], request_type='url',content=result,source=url)
+    if isinstance(result, str):
+        result = {"summary": result }
+
+    save_request(user_id=user["id"], request_type='url',content=result, source=url)
     return {"result": result}
 
 @router.post('/call')
@@ -50,9 +56,11 @@ async def call_endpoint(file:UploadFile, user=Depends(get_current_user)):
     with open(file_path, 'wb') as f:
         f.write(await file.read())
 
-    audio_response = handle_call(file_path)    
-    save_request(user_id=user["id"], request_type="call", content="[voice response]", source=file.filename) # type: ignore
+    audio_response = handle_call(file_path)
+    audio_url = upload_audio(user["id"], audio_response)    
+    save_request(user_id=user["id"], request_type="call", content={"audio_response": "[voice generated]"}, source=file.filename, response_audio_url=audio_url) # type: ignore
     
     return {
-        "response_audio_base64": audio_response.encode("base64")   # type: ignore
+        "response_audio_base64": base64.b64encode(audio_response).decode('utf-8'),
+        "response_audio_url":audio_url
     }

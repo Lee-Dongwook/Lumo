@@ -1,8 +1,8 @@
-from supa.client import supabase
-from supabase import create_client, Client
-from config.settings import JWT_SECRET
 import jwt
-import os
+from fastapi import HTTPException
+from config.settings import JWT_SECRET
+from starlette.status import HTTP_401_UNAUTHORIZED
+
 
 def decode_user(token:str):
     try:
@@ -10,8 +10,11 @@ def decode_user(token:str):
 
        return {
          "id": payload['sub'],
-         "email": payload.get('email')
+         "email": payload['email']
        }
     
-    except Exception:
-      return None
+    except jwt.ExpiredSignatureError:
+      raise HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail="Token expired")
+    
+    except jwt.InvalidTokenError:
+      raise HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail="Invalid token")
