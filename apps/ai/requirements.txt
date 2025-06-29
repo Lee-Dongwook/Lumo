@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+openai
+python-dotenv
+pdfplumber
+docx2txt
+beautifulsoup4
+requests
+sentence-transformers
+langchain
+langgraph
+langchain-community
+faster-whisper
+python-multipart

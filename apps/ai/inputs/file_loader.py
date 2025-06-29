@@ -1,4 +1,4 @@
-from ai.services.extractor import extract_text
+from services.extractor import extract_text
 
 SUPPORTED_TYPES = {"pdf", "docx", "txt"}
 

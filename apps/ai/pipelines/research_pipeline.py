@@ -1,6 +1,6 @@
-from ai.services.extractor import extract_text
-from ai.services.summarizer import summarize
-from ai.services.citation_finder import attach_citations
+from services.extractor import extract_text
+from services.summarizer import summarize
+from services.citation_finder import attach_citations
 
 def run_research_pipeline(input_path:str, input_type:str) -> str:
     """

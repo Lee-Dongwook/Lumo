@@ -1,5 +1,5 @@
-from ai.services.stt_client import transcribe
-from ai.services.tts_client import synthesize
+from services.stt_client import transcribe
+from services.tts_client import synthesize
 from agents.phone_conversation_agent import agent_executor
 
 class CallHandler:

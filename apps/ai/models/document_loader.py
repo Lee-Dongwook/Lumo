@@ -1,4 +1,4 @@
-from langchain.document_loaders import PyPDFLoader, Docx2txtLoader, TextLoader
+from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader, TextLoader
 from pathlib import Path
 
 def load_documents(path:str):

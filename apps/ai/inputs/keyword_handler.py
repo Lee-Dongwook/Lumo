@@ -1,5 +1,5 @@
 from typing import List
-from ai.models.llm import call_llm
+from models.llm import call_llm
 
 KEYWORD_PROMPT = """
 Extract 5-7 key topics or keywords from the following content. Return them as a comma-separated list.
