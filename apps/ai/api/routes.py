@@ -1,4 +1,5 @@
 from fastapi import APIRouter, UploadFile, File, Form
+from supa.client import supabase
 from pipelines.research_pipeline import run_research_pipeline
 from inputs.url_loader import extract_text_from_url
 from services.summarizer import summarize
@@ -6,6 +7,11 @@ from services.citation_finder import attach_citations
 from flows.agent_loop import handle_call
 
 router = APIRouter()
+
+@router.get('/users')
+async def get_users():
+    res = supabase.table('users').select('*').execute()
+    return res.data
 
 @router.post("/analyze/file")
 async def analyze_file(file: UploadFile = File(...), file_type: str = Form(...)):

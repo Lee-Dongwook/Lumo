@@ -12,3 +12,4 @@ langgraph
 langchain-community
 faster-whisper
 python-multipart
+supabase
