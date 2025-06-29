@@ -1,7 +1,8 @@
 import os
 from openai import OpenAI
+from ai.config.settings import OPENAI_API_KEY
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 def call_llm(prompt: str, model: str = 'gpt-3.5-turbo') -> str:
     response = client.chat.completions.create(

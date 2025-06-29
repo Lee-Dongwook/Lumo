@@ -88,7 +88,7 @@ build/**
 
 .env
 
-
+__pycache__
 
 # storybook
 storybook-static/
