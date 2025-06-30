@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
+    "module": "nodenext",
     "lib": ["dom", "esnext"],
     "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "moduleResolution": "nodenext",
     "baseUrl": "./src",
     "paths": {
       "@shared/*": ["./*"]

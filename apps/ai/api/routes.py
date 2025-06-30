@@ -10,7 +10,9 @@ from flows.agent_loop import handle_call
 from middlewares.auth_guard import get_current_user
 import base64
 
-router = APIRouter()
+router = APIRouter(
+    prefix='/api'
+)
 
 @router.get('/users')
 async def get_users():
