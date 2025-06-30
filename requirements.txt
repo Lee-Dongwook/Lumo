@@ -8,4 +8,10 @@ beautifulsoup4
 requests
 sentence-transformers
 langchain
+langchain-openai
 langgraph
+langchain-community
+faster-whisper
+python-multipart
+supabase
+boto3
