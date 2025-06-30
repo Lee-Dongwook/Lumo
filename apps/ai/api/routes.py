@@ -5,6 +5,7 @@ from pipelines.research_pipeline import run_research_pipeline
 from inputs.url_loader import extract_text_from_url
 from services.summarizer import summarize
 from services.citation_finder import attach_citations
+from pipelines.keyword_pipeline import run_keyword_pipeline
 from flows.agent_loop import handle_call
 from middlewares.auth_guard import get_current_user
 import base64
@@ -48,6 +49,18 @@ async def analyze_url(url: str = Form(...), user=Depends(get_current_user)):
         result = {"summary": result }
 
     save_request(user_id=user["id"], request_type='url',content=result, source=url)
+    return {"result": result}
+
+@router.post('/analyze/keyword')
+async def analyze_keyword(keyword:str = Form(...), user=Depends(get_current_user)):
+    result = run_keyword_pipeline(keyword)
+
+    save_request(
+        user_id= user['id'],
+        request_type="keyword",
+        content=result,
+        source=keyword
+    )
     return {"result": result}
 
 @router.post('/call')
