@@ -6,17 +6,68 @@ services:
     container_name: lumo-ai
     env_file:
       - ./apps/ai/.env
-    ports:
-      - '8000:8000'
+    expose:
+      - '8000'
     restart: unless-stopped
+    networks:
+      - backend
 
-  # server:
-  #   build:
-  #     context: ./apps/server
-  #   container_name: lumo-server
-  #   env_file:
-  #     - ./apps/server/.env
-  #   ports:
-  #     - '3000:3000'
-  #   depends_on:
-  #     - ai
+  admin:
+    build:
+      context: ./apps/admin
+    container_name: lumo-admin
+    env_file:
+      - ./apps/admin/.env
+    expose:
+      - '3000'
+    restart: unless-stopped
+    networks:
+      - backend
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./apps/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./infra/certbot/www:/var/www/certbot
+      - ./infra/certbot/conf:/etc/letsencrypt
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - ai
+      - backend
+    networks:
+      - backend
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./infra/certbot/www:/var/www/certbot
+      - ./infra/certbot/conf:/etc/letsencrypt
+    entrypoint: >
+      sh -c "certbot certonly --webroot --webroot-path=/var/www/certbot
+      --email your@email.com --agree-tos --no-eff-email
+      -d yourdomain.com"
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./infra/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+    networks:
+      - backend
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - '3001:3000'
+    networks:
+      - backend
+
+  networks:
+    backend:
+      driver: bridge
