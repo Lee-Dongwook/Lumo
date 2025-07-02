@@ -48,6 +48,12 @@ export default function Index() {
       <TouchableOpacity onPress={() => router.push('/login-email')}>
         <Text style={styles.email}>이메일로 계속하기</Text>
       </TouchableOpacity>
+      <View style={{ height: 20 }} />
+      <SocialButton
+        label="개발자 모드로 메인 이동하기"
+        // icon={GoogleLogo}
+        onPress={() => router.push('/main')}
+      />
     </View>
   )
 }
