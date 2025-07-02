@@ -7,7 +7,7 @@ from ai.services.summarizer import summarize
 from ai.services.citation_finder import attach_citations
 from ai.pipelines.keyword_pipeline import run_keyword_pipeline
 from ai.flows.agent_loop import handle_call
-from middlewares.auth_guard import get_current_user
+from ai.middlewares.auth_guard import get_current_user
 import base64
 
 router = APIRouter(

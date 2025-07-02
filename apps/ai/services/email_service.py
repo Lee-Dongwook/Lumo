@@ -50,13 +50,13 @@ async def send_email_html(to:str, subject:str, html:str):
     
     async with httpx.AsyncClient() as client:
         res = await client.post(
-            'https//api.resend.com/emails',
+            'https://api.resend.com/emails',
             headers={
                 'Authorization': f"Bearer {RESEND_API_KEY}",
                 'Content-Type': 'application/json'
             },
             json={
-                "from": "Lumo <no-reply@lumo.com>",
+                "from": "Lumo <onboarding@resend.dev>",
                 "to": [to],
                 "subject": subject,
                 "html": html
@@ -74,7 +74,7 @@ async def send_verification_email(email:str):
     supabase.table('email_verification_codes').insert({
         'email':email,
         'code': code,
-        'expries_at': expires_at.isoformat()
+        'expires_at': expires_at.isoformat() 
     }).execute()
     
     subject = '[Lumo] 회원가입 인증번호'

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, EmailStr
-from services.email_service import send_verification_email
+from ai.services.email_service import send_verification_email
 
-router = APIRouter(prefix='/auth', tags=['auth'])
+router = APIRouter(prefix='/api/auth', tags=['auth'])
 
 class SendCodeRequest(BaseModel):
     email:EmailStr
@@ -14,4 +14,6 @@ async def send_code(req:SendCodeRequest):
        return {'message': "인증번호 전송 완료"}
     
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        import traceback
+        print("[ERROR]", traceback.format_exc())
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")

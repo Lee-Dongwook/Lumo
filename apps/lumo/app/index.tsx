@@ -50,9 +50,15 @@ export default function Index() {
       </TouchableOpacity>
       <View style={{ height: 20 }} />
       <SocialButton
-        label="개발자 모드로 메인 이동하기"
+        label="개발자 모드 / 메인 이동하기"
         // icon={GoogleLogo}
         onPress={() => router.push('/main')}
+      />
+      <View style={{ height: 20 }} />
+      <SocialButton
+        label="개발자 모드 / 채팅으로 이동하기"
+        // icon={GoogleLogo}
+        onPress={() => router.push('/chat/1')}
       />
     </View>
   )

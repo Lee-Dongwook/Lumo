@@ -10,11 +10,11 @@ import {
   Alert,
 } from 'react-native'
 import { useRouter } from 'expo-router'
-import { supabase } from '@/lib/supabase'
 import { useAppMutation } from 'shared'
 
 export default function SignupEmail() {
   const [email, setEmail] = useState('')
+  const [isSent, setIsSent] = useState(false)
   const router = useRouter()
 
   const isValidEmail = email.includes('@') && email.includes('.')
@@ -41,9 +41,11 @@ export default function SignupEmail() {
           '인증번호 전송 완료',
           '입력하신 이메일로 인증번호를 보냈어요.',
         )
+        setIsSent(true)
       },
       onError: (err: any) => {
         Alert.alert('전송 실패', err.message)
+        setIsSent(false)
       },
     },
   )
@@ -81,6 +83,16 @@ export default function SignupEmail() {
           <Text style={styles.sendButtonText}>인증 받기</Text>
         </TouchableOpacity>
       </View>
+      {isSent && (
+        <TouchableOpacity
+          style={styles.nextButton}
+          onPress={() =>
+            router.push({ pathname: '/signup/code', params: { email } })
+          }
+        >
+          <Text style={styles.nextButtonText}>다음</Text>
+        </TouchableOpacity>
+      )}
     </KeyboardAvoidingView>
   )
 }
@@ -122,5 +134,17 @@ const styles = StyleSheet.create({
   sendButtonText: {
     color: 'white',
     fontWeight: '500',
+  },
+  nextButton: {
+    backgroundColor: '#131417',
+    paddingVertical: 14,
+    borderRadius: 12,
+    marginTop: 24,
+    alignItems: 'center',
+  },
+  nextButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 })
