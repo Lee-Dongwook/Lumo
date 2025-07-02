@@ -10,13 +10,12 @@
       "require": "./src/index.ts"
     }
   },
-  "dependencies": {
-    "@tanstack/react-query": "^5.81.5",
-    "react": "^19.1.0",
-    "react-native": "^0.80.0"
+  "peerDependencies": {
+    "@tanstack/react-query": "*",
+    "react": "*",
+    "react-native": "*"
   },
   "devDependencies": {
-    "@types/react": "^19",
-    "typescript": "^5.8.3"
+    "typescript": "^5.0.0"
   }
 }

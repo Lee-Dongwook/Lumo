@@ -4319,7 +4319,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^19":
+"@types/react@npm:*":
   version: 19.1.8
   resolution: "@types/react@npm:19.1.8"
   dependencies:
@@ -4706,6 +4706,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.27.4"
     "@eslint/js": "npm:^9.28.0"
+    "@tanstack/react-query": "npm:^5.81.5"
     "@types/babel__core": "npm:^7"
     "@types/lodash": "npm:^4"
     "@types/react": "npm:~18.2.21"
@@ -9293,6 +9294,7 @@ __metadata:
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-web: "npm:~0.20.0"
     react-native-webview: "npm:13.13.5"
+    shared: "npm:*"
     typescript: "npm:~5.8.3"
     zustand: "npm:^5.0.5"
   languageName: unknown
@@ -11301,13 +11303,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^19.1.0":
-  version: 19.1.0
-  resolution: "react@npm:19.1.0"
-  checksum: 10/d0180689826fd9de87e839c365f6f361c561daea397d61d724687cae88f432a307d1c0f53a0ee95ddbe3352c10dac41d7ff1ad85530fb24951b27a39e5398db4
-  languageName: node
-  linkType: hard
-
 "read-cache@npm:^1.0.0":
   version: 1.0.0
   resolution: "read-cache@npm:1.0.0"
@@ -11906,15 +11901,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shared@workspace:packages/shared":
+"shared@npm:*, shared@workspace:packages/shared":
   version: 0.0.0-use.local
   resolution: "shared@workspace:packages/shared"
   dependencies:
-    "@tanstack/react-query": "npm:^5.81.5"
-    "@types/react": "npm:^19"
-    react: "npm:^19.1.0"
-    react-native: "npm:^0.80.0"
-    typescript: "npm:^5.8.3"
+    typescript: "npm:^5.0.0"
+  peerDependencies:
+    "@tanstack/react-query": "*"
+    react: "*"
+    react-native: "*"
   languageName: unknown
   linkType: soft
 
@@ -12893,7 +12888,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.2.2, typescript@npm:^5.8.3, typescript@npm:~5.8.3":
+"typescript@npm:^5.0.0, typescript@npm:^5.2.2, typescript@npm:~5.8.3":
   version: 5.8.3
   resolution: "typescript@npm:5.8.3"
   bin:
@@ -12903,7 +12898,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.2.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.8.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A~5.8.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.0.0#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.2.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A~5.8.3#optional!builtin<compat/typescript>":
   version: 5.8.3
   resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"
   bin:

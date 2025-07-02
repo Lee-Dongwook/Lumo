@@ -11,46 +11,31 @@ import {
 } from 'react-native'
 import { useRouter } from 'expo-router'
 import { supabase } from '@/lib/supabase'
-import { useAppMutation } from 'shared'
 
-export default function SignupEmail() {
+export default function FindPassword() {
   const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const isValidEmail = email.includes('@') && email.includes('.')
 
-  const { mutate: sendVerificationCode, isPending } = useAppMutation(
-    async (email: string) => {
-      const res = await fetch(
-        `${process.env.EXPO_PUBLIC_API_BASE_URL}/auth/send-code`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        },
+  const handleSendResetLink = async () => {
+    if (!isValidEmail) return
+    setLoading(true)
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email)
+
+    if (error) {
+      Alert.alert('전송 실패', error.message)
+    } else {
+      Alert.alert(
+        '전송 완료',
+        '입력하신 이메일로 비밀번호 재설정 메일을 보냈습니다.',
       )
+      router.back()
+    }
 
-      if (!res.ok) {
-        const { message } = await res.json()
-        throw new Error(message || '인증번호 전송 실패')
-      }
-    },
-    {
-      onSuccess: () => {
-        Alert.alert(
-          '인증번호 전송 완료',
-          '입력하신 이메일로 인증번호를 보냈어요.',
-        )
-      },
-      onError: (err: any) => {
-        Alert.alert('전송 실패', err.message)
-      },
-    },
-  )
-
-  const handleSend = () => {
-    if (!isValidEmail || isPending) return
-    sendVerificationCode(email)
+    setLoading(false)
   }
 
   return (
@@ -58,7 +43,10 @@ export default function SignupEmail() {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      <Text style={styles.title}>Sign up</Text>
+      <Text style={styles.title}>비밀번호 찾기</Text>
+      <Text style={styles.subtext}>
+        가입한 이메일로 임시 비밀번호를 전송해드려요
+      </Text>
 
       <View style={styles.inputRow}>
         <View style={{ flex: 1 }}>
@@ -72,13 +60,12 @@ export default function SignupEmail() {
             autoCapitalize="none"
           />
         </View>
-
         <TouchableOpacity
           style={[styles.sendButton, { opacity: isValidEmail ? 1 : 0.5 }]}
-          onPress={handleSend}
-          disabled={!isValidEmail || isPending}
+          onPress={handleSendResetLink}
+          disabled={!isValidEmail || loading}
         >
-          <Text style={styles.sendButtonText}>인증 받기</Text>
+          <Text style={styles.sendButtonText}>전송</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -95,6 +82,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: 'bold',
+    marginBottom: 12,
+  },
+  subtext: {
+    fontSize: 14,
+    color: '#555',
     marginBottom: 32,
   },
   label: {

@@ -1,5 +1,10 @@
 import { Stack } from 'expo-router'
+import { QueryProvider } from 'shared'
 
 export default function Layout() {
-  return <Stack />
+  return (
+    <QueryProvider>
+      <Stack />
+    </QueryProvider>
+  )
 }
