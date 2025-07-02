@@ -16,3 +16,4 @@ python-multipart
 supabase
 boto3
 googlesearch-python
+resend
