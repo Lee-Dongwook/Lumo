@@ -2,8 +2,8 @@ import random
 import string
 import httpx
 from datetime import datetime, timedelta
-from config.settings import RESEND_API_KEY
-from supa.client import supabase
+from ai.config.settings import RESEND_API_KEY
+from ai.supa.client import supabase
 
 def generate_code(length=6) -> str:
     return ''.join(random.choices(string.digits, k=length))

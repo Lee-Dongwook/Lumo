@@ -1,6 +1,6 @@
 import jwt
 from fastapi import HTTPException
-from config.settings import JWT_SECRET
+from ai.config.settings import JWT_SECRET
 from starlette.status import HTTP_401_UNAUTHORIZED
 
 

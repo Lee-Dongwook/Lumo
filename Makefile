@@ -2,7 +2,10 @@ install:
 	pip install -r requirements.txt
 
 dev:
-	PYTHONPATH=apps uvicorn ai.main_api:app --reload --reload-dir=apps
+	PYTHONPATH=apps uvicorn ai.main_api:app --reload --reload-dir=apps/ai
+
+prod:
+	PYTHONPATH=apps uvicorn ai.main_api:app --host 127.0.0.1 --port 8000
 
 cli:
 	python main.py sample.pdf pdf

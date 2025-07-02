@@ -1,7 +1,7 @@
-from services.stt_client import transcribe
-from services.tts_client import synthesize
-from agents.phone_conversation_agent import agent_executor
-from agents.chat_agent import agent
+from ai.services.stt_client import transcribe
+from ai.services.tts_client import synthesize
+from ai.agents.phone_conversation_agent import agent_executor
+from ai.agents.chat_agent import agent
 
 """
 ElevenLabs Voice ID 필요

@@ -1,6 +1,6 @@
 import sys
-from pipelines.research_pipeline import run_research_pipeline
-from inputs.url_loader import extract_text_from_url
+from ai.pipelines.research_pipeline import run_research_pipeline
+from ai.inputs.url_loader import extract_text_from_url
 
 def main():
     if len(sys.argv) !=3:

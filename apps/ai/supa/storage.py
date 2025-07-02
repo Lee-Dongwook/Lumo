@@ -1,5 +1,5 @@
 from uuid import uuid4
-from supa.client import supabase
+from ai.supa.client import supabase
 
 BUCKET_NAME = "call-responses"
 

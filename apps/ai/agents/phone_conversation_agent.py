@@ -1,6 +1,6 @@
 from langgraph.graph import StateGraph
-from langchain.chat_models import ChatOpenAI
-from services.memory_store import get_memory
+from langchain_community.chat_models import ChatOpenAI
+from ai.services.memory_store import get_memory
 from typing import TypedDict
 
 llm = ChatOpenAI(model="gpt-3.5-turbo") # type: ignore
@@ -12,7 +12,7 @@ class AgentState(TypedDict):
 
 def respond(state):
     input_text = state["user_input"]
-    response = llm.predict(input=input_text)
+    response = llm.predict(input=input_text, text=input_text)
     memory.save_context({"input": input_text}, {"output": response})
     return {"response": response}
 

@@ -1,6 +1,6 @@
 from fastapi import Request, HTTPException, Depends, WebSocket
-from supa.auth import decode_user
-from supa.users import ensure_user_exists
+from ai.supa.auth import decode_user
+from ai.supa.users import ensure_user_exists
 
 async def get_current_user(request: Request):
      auth = request.headers.get("authorization")

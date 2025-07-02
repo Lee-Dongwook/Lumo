@@ -1,8 +1,8 @@
 from typing import List
-from services.url_crawler import google_search
-from inputs.url_loader import extract_text_from_url
-from services.summarizer import summarize
-from services.citation_finder import attach_citations
+from ai.services.url_crawler import google_search
+from ai.inputs.url_loader import extract_text_from_url
+from ai.services.summarizer import summarize
+from ai.services.citation_finder import attach_citations
 
 def run_keyword_pipeline(keyword:str, num_results: int=5) -> dict:
     urls: List[str] = google_search(keyword, num_results=num_results)

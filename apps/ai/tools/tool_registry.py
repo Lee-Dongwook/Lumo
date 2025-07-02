@@ -1,6 +1,6 @@
 from langchain.tools import Tool
 from langchain.utilities import SerpAPIWrapper
-from services.summarizer import summarize
+from ai.services.summarizer import summarize
 
 
 def get_tools():

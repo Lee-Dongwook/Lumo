@@ -22,7 +22,7 @@ export default function SignupEmail() {
   const { mutate: sendVerificationCode, isPending } = useAppMutation(
     async (email: string) => {
       const res = await fetch(
-        `${process.env.EXPO_PUBLIC_API_BASE_URL}/auth/send-code`,
+        `${process.env.EXPO_PUBLIC_API_BASE_URL}/api/auth/send-code`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

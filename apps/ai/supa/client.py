@@ -1,4 +1,4 @@
-from config.settings import SUPABASE_URL, SUPABASE_SERVICE_KEY
+from ai.config.settings import SUPABASE_URL, SUPABASE_SERVICE_KEY
 from supabase import create_client
 from datetime import datetime
 import traceback

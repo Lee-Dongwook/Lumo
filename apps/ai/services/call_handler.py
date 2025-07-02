@@ -1,6 +1,6 @@
-from services.stt_client import transcribe
-from services.tts_client import synthesize
-from agents.phone_conversation_agent import agent_executor
+from ai.services.stt_client import transcribe
+from ai.services.tts_client import synthesize
+from ai.agents.phone_conversation_agent import agent_executor
 
 class CallHandler:
     def __init__(self, voice_id):

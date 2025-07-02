@@ -1,4 +1,4 @@
-from models.llm import call_llm
+from ai.models.llm import call_llm
 
 DEFAULT_PROMPT = """
 You are an expert research assistant. Summarize the following content in a concise and informative way:

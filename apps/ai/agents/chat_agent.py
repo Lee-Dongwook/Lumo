@@ -4,7 +4,7 @@ from langchain_core.messages import AIMessage, BaseMessage
 from langchain_core.runnables import RunnableLambda
 from langgraph.prebuilt import chat_agent_executor
 from langchain_openai import ChatOpenAI
-from tools.tool_registry import get_tools
+from ai.tools.tool_registry import get_tools
 
 tools = get_tools()
 llm = ChatOpenAI(model="gpt-3.5-turbo",temperature=0)

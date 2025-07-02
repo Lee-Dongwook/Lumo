@@ -1,12 +1,12 @@
 from fastapi import APIRouter, UploadFile, File, Form, Depends
-from supa.client import supabase, save_request
-from supa.storage import upload_audio
-from pipelines.research_pipeline import run_research_pipeline
-from inputs.url_loader import extract_text_from_url
-from services.summarizer import summarize
-from services.citation_finder import attach_citations
-from pipelines.keyword_pipeline import run_keyword_pipeline
-from flows.agent_loop import handle_call
+from ai.supa.client import supabase, save_request
+from ai.supa.storage import upload_audio
+from ai.pipelines.research_pipeline import run_research_pipeline
+from ai.inputs.url_loader import extract_text_from_url
+from ai.services.summarizer import summarize
+from ai.services.citation_finder import attach_citations
+from ai.pipelines.keyword_pipeline import run_keyword_pipeline
+from ai.flows.agent_loop import handle_call
 from middlewares.auth_guard import get_current_user
 import base64
 
