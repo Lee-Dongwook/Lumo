@@ -17,7 +17,7 @@ def get_verification_email_html(code: str) -> str:
             이메일 양식
           </p>
           <h2 style="margin-top: 24px;">제목: [Lumo] 회원가입 인증번호</h2>
-          <h3>Odyssey 이메일 인증 안내</h3>
+          <h3>Lumo 이메일 인증 안내</h3>
 
           <p style="margin-top: 24px;">
             안녕하세요, 고객님<br/>
