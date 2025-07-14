@@ -1,5 +1,5 @@
 import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
-import { useRouter } from 'expo-router'
+import { RelativePathString, useRouter } from 'expo-router'
 
 type OAuthProvider = 'google' | 'apple' | 'kakao'
 
@@ -24,7 +24,7 @@ export default function Index() {
   const router = useRouter()
 
   const handleOAuth = (provider: OAuthProvider) => {
-    router.push(`/auth/${provider}`)
+    router.push(`/auth/${provider}` as RelativePathString)
   }
 
   return (

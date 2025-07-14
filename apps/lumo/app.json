@@ -9,7 +9,17 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.leedongwook.lumo",
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.412075712573-j3tj7rgcniq0jpv4nrscevalre2vmml0"
+            ]
+          }
+        ]
+      }
     },
     "android": {
       "package": "com.leedongwook.lumo",
@@ -34,7 +44,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "@react-native-google-signin/google-singin"
     ],
     "experiments": {
       "typedRoutes": true
