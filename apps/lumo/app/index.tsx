@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { useRouter } from 'expo-router'
 
-type OAuthProvider = 'google' | 'apple'
+type OAuthProvider = 'google' | 'apple' | 'kakao'
 
 function SocialButton({
   label,
@@ -42,6 +42,11 @@ export default function Index() {
           label="Apple로 계속하기"
           // icon={AppleLogo}
           onPress={() => handleOAuth('apple')}
+        />
+        <SocialButton
+          label="Kakao로 계속하기"
+          // icon={AppleLogo}
+          onPress={() => handleOAuth('kakao')}
         />
       </View>
 
