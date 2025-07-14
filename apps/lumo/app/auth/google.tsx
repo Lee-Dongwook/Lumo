@@ -13,7 +13,8 @@ export default function GoogleLoginScreen() {
 
   const [request, response, promptAsync] = Google.useAuthRequest({
     webClientId: '아까 웹 클라이언트 아이디',
-    androidClientId: '아까 안드로이드 클라이언트 아이디',
+    androidClientId:
+      '412075712573-kl21umbv3e9rvnt0k6not93tdsl6abrr.apps.googleusercontent.com',
     iosClientId: '',
   })
 

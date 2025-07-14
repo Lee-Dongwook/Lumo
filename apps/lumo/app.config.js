@@ -1,6 +1,15 @@
+import appJson from './app.json'
+
 export default {
+  ...appJson,
   expo: {
+    ...appJson.expo,
     extra: {
+      ...(appJson.expo.extra || {
+        eas: {
+          projectId: 'b2d64831-a802-4ec1-858f-826ab8d63303',
+        },
+      }),
       EXPO_ROUTER_APP_ROOT: 'apps/lumo/app',
     },
   },
