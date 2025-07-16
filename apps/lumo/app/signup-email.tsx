@@ -9,7 +9,7 @@ import {
   Platform,
   Alert,
 } from 'react-native'
-import { useRouter } from 'expo-router'
+import { RelativePathString, useRouter } from 'expo-router'
 import { useAppMutation } from 'shared'
 
 export default function SignupEmail() {
@@ -90,7 +90,7 @@ export default function SignupEmail() {
     {
       onSuccess: () => {
         Alert.alert('인증 성공', '이메일 인증이 완료됐어요.')
-        // router.push('/signup/form') // 👉 다음 단계로
+        router.push('/signup-password' as RelativePathString)
       },
       onError: (err: any) => {
         Alert.alert('인증 실패', err.message)
@@ -148,8 +148,8 @@ export default function SignupEmail() {
             {isSent ? '재전송' : '인증 받기'}
           </Text>
         </TouchableOpacity>
-        {emailError && <Text style={styles.errorText}>⚠ {emailError}</Text>}
       </View>
+      {emailError && <Text style={styles.errorText}>⚠ {emailError}</Text>}
       {isSent && (
         <>
           <Text style={styles.label}>인증번호</Text>

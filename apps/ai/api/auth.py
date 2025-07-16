@@ -8,7 +8,11 @@ router = APIRouter(prefix='/api/auth', tags=['auth'])
 
 class SendCodeRequest(BaseModel):
     email:EmailStr
-    code: str
+    
+
+class VerifyCodeRequest(BaseModel):
+    email:EmailStr
+    code:str
 
 @router.post('/send-code')
 async def send_code(req: SendCodeRequest):
@@ -21,8 +25,8 @@ async def send_code(req: SendCodeRequest):
         print("[ERROR]", traceback.format_exc())
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
     
-@router.post('/verfiy-code')
-async def verify_code(req: SendCodeRequest):
+@router.post('/verify-code')
+async def verify_code(req: VerifyCodeRequest):
     now = datetime.utcnow()
     res = supabase.table('email_verification_codes').select('*').eq('email',req.email).eq('code',req.code).gte('expires_at', now.isoformat()).order('created_at', desc=True).limit(1).execute()
 
