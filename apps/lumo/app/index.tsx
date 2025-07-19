@@ -31,7 +31,6 @@ export default function Index() {
     <View style={styles.container}>
       <Text style={styles.logo}>✴</Text>
       <Text style={styles.subtitle}>Dreams drive your Odyssey</Text>
-
       <View style={styles.buttonGroup}>
         <SocialButton
           label="Google로 계속하기"
@@ -49,7 +48,6 @@ export default function Index() {
           onPress={() => handleOAuth('kakao')}
         />
       </View>
-
       <TouchableOpacity onPress={() => router.push('/login-email')}>
         <Text style={styles.email}>이메일로 계속하기</Text>
       </TouchableOpacity>

@@ -22,6 +22,15 @@ class SignupRequest(BaseModel):
     email: EmailStr
     password: str = Field(min_length=8)
 
+class AgreementStatus(BaseModel):
+    terms: bool = Field(..., description="이용약관 동의 여부")
+    privacy: bool = Field(..., description="개인정보 수집 동의 여부")
+
+class AgreementRequest(BaseModel):
+    email: EmailStr
+    agreement: AgreementStatus
+
+
 @router.post('/send-code')
 async def send_code(req: SendCodeRequest):
     try:
@@ -72,3 +81,26 @@ async def signup(req:SignupRequest):
         raise HTTPException(status_code=500, detail=f"회원가입 실패: {str(e)}")
 
     return {'message':'회원가입 완료'}
+
+@router.put('/agreement')
+async def update_agreement(req:AgreementRequest):
+    try:
+        check = supabase.table('users').select('id').eq('email',req.email).limit(1).execute()
+        if not check.data:
+            raise HTTPException(status_code=404, detail='사용자를 찾을 수 없습니다.')
+
+        update_data = {
+            'agreement': req.agreement.model_dump(),
+            'updated_at': datetime.utcnow().isoformat()
+        }
+
+        update_res = supabase.table('users').update(update_data).eq('email', req.email).execute()
+
+        if update_res.error:
+            raise HTTPException(status_code=500, detail=f"약관 동의 업데이트 실패: {update_res.error.message}")
+        
+        return {'message': '약관 동의 상태가 업데이트되었습니다.'}
+
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"약관 동의 업데이트 실패: {str(e)}")

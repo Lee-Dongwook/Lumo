@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import { useLocalSearchParams, useRouter } from 'expo-router'
+import {
+  RelativePathString,
+  useLocalSearchParams,
+  useRouter,
+} from 'expo-router'
 import {
   View,
   Text,
@@ -57,7 +61,10 @@ export default function SignupPassword() {
     signUp(undefined, {
       onSuccess: () => {
         Alert.alert('회원가입 완료', '이제 프로필을 설정해볼까요?')
-        // router.push('/onboarding/profile') // 예시: 다음 화면
+        router.push({
+          pathname: '/user-agreement-form',
+          params: { email, password },
+        })
       },
       onError: (err: any) => {
         Alert.alert('회원가입 실패', err.message || '다시 시도해주세요.')
