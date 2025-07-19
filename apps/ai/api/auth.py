@@ -1,10 +1,14 @@
 from fastapi import APIRouter, HTTPException, Query
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
+from passlib.context import CryptContext
 from datetime import datetime
 from ai.services.email_service import send_verification_email
 from ai.supa.client import supabase
+import traceback
 
 router = APIRouter(prefix='/api/auth', tags=['auth'])
+
+pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
 class SendCodeRequest(BaseModel):
     email:EmailStr
@@ -13,6 +17,10 @@ class SendCodeRequest(BaseModel):
 class VerifyCodeRequest(BaseModel):
     email:EmailStr
     code:str
+
+class SignupRequest(BaseModel):
+    email: EmailStr
+    password: str = Field(min_length=8)
 
 @router.post('/send-code')
 async def send_code(req: SendCodeRequest):
@@ -44,3 +52,23 @@ async def check_email(email:EmailStr = Query(...)):
         return {"exists": True}
     
     return {'exists': False}
+
+@router.post('/signup')
+async def signup(req:SignupRequest):
+    res = supabase.table('users').select('id').eq('email',req.email).limit(1).execute()
+    if res.data and len(res.data) > 0:
+        raise HTTPException(status_code=400, detail='이미 가입된 이메일입니다.')
+    
+    hashed_password = pwd_context.hash(req.password)
+
+    try:
+        insert_res = supabase.table('users').insert({
+            'email':req.email,
+            'password': hashed_password,
+            'created_at': datetime.utcnow().isoformat()
+        }).execute()
+    except Exception as e:
+        traceback.print_exc() 
+        raise HTTPException(status_code=500, detail=f"회원가입 실패: {str(e)}")
+
+    return {'message':'회원가입 완료'}

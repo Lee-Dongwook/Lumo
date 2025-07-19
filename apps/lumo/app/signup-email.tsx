@@ -25,7 +25,7 @@ export default function SignupEmail() {
 
   useEffect(() => {
     if (!isSent || timeLeft <= 0) return
-    const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000)
+    const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 600)
     return () => clearInterval(timer)
   }, [isSent, timeLeft])
 
@@ -62,7 +62,7 @@ export default function SignupEmail() {
           '입력하신 이메일로 인증번호를 보냈어요.',
         )
         setIsSent(true)
-        setTimeLeft(1000)
+        setTimeLeft(600)
       },
       onError: (err: any) => {
         Alert.alert('전송 실패', err.message)
@@ -90,7 +90,10 @@ export default function SignupEmail() {
     {
       onSuccess: () => {
         Alert.alert('인증 성공', '이메일 인증이 완료됐어요.')
-        router.push('/signup-password' as RelativePathString)
+        router.push({
+          pathname: '/signup-password' as RelativePathString,
+          params: { email },
+        })
       },
       onError: (err: any) => {
         Alert.alert('인증 실패', err.message)
