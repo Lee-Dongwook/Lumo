@@ -6,10 +6,12 @@ import {
   TouchableOpacity,
   StyleSheet,
   Pressable,
+  Alert,
 } from 'react-native'
 import { useRouter } from 'expo-router'
-import { supabase } from '@/lib/supabase'
 import { Ionicons } from '@expo/vector-icons'
+import { useAppMutation } from 'shared'
+import { useUserStore } from '@/store/userStore'
 
 interface LoginState {
   email: string
@@ -18,34 +20,50 @@ interface LoginState {
 
 export default function EmailLogin() {
   const router = useRouter()
-
   const [login, setLogin] = useState<LoginState>({
     email: '',
     password: '',
   })
-
   const [showPassword, setShowPassword] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+
+  const { mutate: loginMuatate, isPending } = useAppMutation(
+    async ({ email, password }: LoginState) => {
+      const res = await fetch(
+        `${process.env.EXPO_PUBLIC_API_BASE_URL}/api/auth/login`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        },
+      )
+
+      const data = await res.json()
+
+      if (!res.ok) throw new Error(data.detail || '로그인 실패')
+      return data
+    },
+    {
+      onSuccess: (data) => {
+        useUserStore.getState().login({
+          token: data.access_token,
+          user: data.user,
+        })
+        router.replace('/main')
+      },
+      onError: (err: any) => {
+        Alert.alert('로그인 실패', err.message)
+      },
+    },
+  )
 
   const handleLogin = async () => {
-    setLoading(true)
-    setError(null)
-
     const email = login.email
     const password = login.password
 
-    const { error } = await supabase.auth.signInWithPassword({
+    loginMuatate({
       email,
       password,
     })
-
-    if (error) {
-      setError(error.message)
-    } else {
-      router.replace('/')
-    }
-    setLoading(false)
   }
 
   const isValid = login.email.length > 4 && login.password.length >= 6
@@ -98,14 +116,14 @@ export default function EmailLogin() {
         </View>
       </View>
 
-      {error && <Text style={styles.error}>{error}</Text>}
-
       <TouchableOpacity
         style={[styles.button, { opacity: isValid ? 1 : 0.4 }]}
         onPress={handleLogin}
-        disabled={!isValid || loading}
+        disabled={!isValid || isPending}
       >
-        <Text style={styles.buttonText}>로그인</Text>
+        <Text style={styles.buttonText}>
+          {isPending ? '로그인 중...' : '로그인'}
+        </Text>
       </TouchableOpacity>
 
       <View style={styles.bottomLinks}>

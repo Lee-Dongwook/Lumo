@@ -3,6 +3,7 @@ from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel, EmailStr, Field
 from passlib.context import CryptContext
 from datetime import datetime
+from ai.models.auth import SendCodeRequest, VerifyCodeRequest, SignupRequest, AgreementStatus, AgreementRequest,  LoginRequest
 from ai.services.email_service import send_verification_email
 from ai.supa.client import supabase
 from ai.utils.jwt_utils import create_access_token, decode_token
@@ -12,31 +13,6 @@ router = APIRouter(prefix='/api/auth', tags=['auth'])
 
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/api/auth/login')
-
-class SendCodeRequest(BaseModel):
-    email:EmailStr
-    
-
-class VerifyCodeRequest(BaseModel):
-    email:EmailStr
-    code:str
-
-class SignupRequest(BaseModel):
-    email: EmailStr
-    password: str = Field(min_length=8)
-
-class AgreementStatus(BaseModel):
-    terms: bool = Field(..., description="이용약관 동의 여부")
-    privacy: bool = Field(..., description="개인정보 수집 동의 여부")
-
-class AgreementRequest(BaseModel):
-    email: EmailStr
-    agreement: AgreementStatus
-
-class LoginRequest(BaseModel):
-    email: EmailStr
-    password: str
-
 
 @router.post('/send-code')
 async def send_code(req: SendCodeRequest):
