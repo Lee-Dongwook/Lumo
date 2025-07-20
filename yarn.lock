@@ -3723,6 +3723,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/slider@npm:^4.5.7":
+  version: 4.5.7
+  resolution: "@react-native-community/slider@npm:4.5.7"
+  checksum: 10/44030cfc5ab0e9557b1ea1d434d4f06733a210a268b4edc42645065d1d4cae769b23cd4888578607832966798f383fd901c6a9fad9e90aa4c2d7ef607aa6be2b
+  languageName: node
+  linkType: hard
+
 "@react-native-google-signin/google-signin@npm:^15.0.0":
   version: 15.0.0
   resolution: "@react-native-google-signin/google-signin@npm:15.0.0"
@@ -11395,6 +11402,7 @@ __metadata:
     "@expo/vector-icons": "npm:^14.1.0"
     "@expo/webpack-config": "npm:^19.0.1"
     "@react-native-async-storage/async-storage": "npm:^2.2.0"
+    "@react-native-community/slider": "npm:^4.5.7"
     "@react-native-google-signin/google-signin": "npm:^15.0.0"
     "@react-native-seoul/kakao-login": "npm:^5.4.1"
     "@react-navigation/bottom-tabs": "npm:^7.3.10"

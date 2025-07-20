@@ -23,7 +23,7 @@ export default function CurriculumSingleScreen() {
     mode_meta: {
       date: '',
       time: '',
-      call_time: 0,
+      call_time: 20,
     } as SingleMeta,
   })
 

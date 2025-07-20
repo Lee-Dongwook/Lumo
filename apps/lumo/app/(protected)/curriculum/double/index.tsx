@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
 } from 'react-native'
+import Slider from '@react-native-community/slider'
 import LabeledBlock from '@/components/curriculum/LabeledBlock'
 import UploadBox from '@/components/curriculum/UploadBox'
 import Toggle from '@/components/curriculum/Toggle'
@@ -15,10 +16,6 @@ import TimeRangeInput from '@/components/curriculum/TimeRangeInput'
 import type { LearningScheduleBase, CurriculumMeta } from '@/types/learning'
 
 export default function CurriculumDoubleScreen() {
-  const [days, setDays] = useState<string[]>([])
-  const [fromTime, setFromTime] = useState('19:00')
-  const [toTime, setToTime] = useState('20:00')
-
   const [curriculumData, setCurriculumData] = useState<LearningScheduleBase>({
     mode: 'curriculum',
     purpose: '',
@@ -34,7 +31,7 @@ export default function CurriculumDoubleScreen() {
       repeat_days: [],
       session_time_from: '',
       session_time_to: '',
-      call_time: 0,
+      call_time: 10,
     } as CurriculumMeta,
   })
 
@@ -161,22 +158,38 @@ export default function CurriculumDoubleScreen() {
               updateCurriculumMeta('total_sessions', parseInt(text, 10))
             }
           />
-          <WeekdaySelector selected={days} onChange={setDays} />
+          <WeekdaySelector
+            selected={(curriculumData.mode_meta as CurriculumMeta).repeat_days}
+            onChange={(updatedDays) =>
+              updateCurriculumMeta('repeat_days', updatedDays)
+            }
+          />
         </LabeledBlock>
 
         <LabeledBlock label="학습 시간 설정">
           <TimeRangeInput
-            from={fromTime}
-            to={toTime}
-            onChange={(f, t) => {
-              setFromTime(f)
-              setToTime(t)
+            from={
+              (curriculumData.mode_meta as CurriculumMeta).session_time_from
+            }
+            to={(curriculumData.mode_meta as CurriculumMeta).session_time_to}
+            onChange={(from, to) => {
+              updateCurriculumMeta('session_time_from', from)
+              updateCurriculumMeta('session_time_to', to)
             }}
           />
         </LabeledBlock>
 
         <LabeledBlock label="전화 시간">
-          <Text>슬라이더 추가 예정 (선택된 시간: 10분)</Text>
+          <Slider
+            minimumValue={0}
+            maximumValue={60}
+            step={10}
+            value={(curriculumData.mode_meta as CurriculumMeta).call_time}
+            onValueChange={(value) => updateCurriculumMeta('call_time', value)}
+          />
+          <Text style={{ marginTop: 8 }}>
+            선택된 시간: {curriculumData.mode_meta.call_time ?? 0}분
+          </Text>
         </LabeledBlock>
 
         <Button title="설정 완료하기" onPress={onSubmit} />
