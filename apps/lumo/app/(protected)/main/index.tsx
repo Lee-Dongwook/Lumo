@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native'
+import { useRouter } from 'expo-router'
 import {
   Ionicons,
   MaterialCommunityIcons,
@@ -14,6 +15,7 @@ import {
 } from '@expo/vector-icons'
 
 export default function Main() {
+  const router = useRouter()
   return (
     <ScrollView style={styles.wrapper} contentContainerStyle={styles.container}>
       {/* 말풍선 */}
@@ -96,6 +98,15 @@ export default function Main() {
         <Text style={styles.cardTitle}>커리큘럼 보기</Text>
         <Text style={styles.cardDesc}>예약된 학습</Text>
       </View>
+
+      {/* 설정 버튼 */}
+      <TouchableOpacity
+        style={styles.settingsButton}
+        onPress={() => router.push('/settings')}
+      >
+        <Ionicons name="settings-outline" size={20} color="#6C4DFF" />
+        <Text style={styles.menuText}>환경 설정</Text>
+      </TouchableOpacity>
     </ScrollView>
   )
 }
@@ -193,5 +204,19 @@ const styles = StyleSheet.create({
   cardDesc: {
     fontSize: 14,
     color: '#888',
+  },
+  settingsButton: {
+    marginTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 2,
   },
 })

@@ -30,7 +30,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>✴</Text>
-      <Text style={styles.subtitle}>Dreams drive your Odyssey</Text>
+      <Text style={styles.subtitle}>Lumo</Text>
       <View style={styles.buttonGroup}>
         <SocialButton
           label="Google로 계속하기"
@@ -51,18 +51,6 @@ export default function Index() {
       <TouchableOpacity onPress={() => router.push('/login-email')}>
         <Text style={styles.email}>이메일로 계속하기</Text>
       </TouchableOpacity>
-      <View style={{ height: 20 }} />
-      <SocialButton
-        label="개발자 모드 / 메인 이동하기"
-        // icon={GoogleLogo}
-        onPress={() => router.push('/main')}
-      />
-      <View style={{ height: 20 }} />
-      <SocialButton
-        label="개발자 모드 / 채팅으로 이동하기"
-        // icon={GoogleLogo}
-        onPress={() => router.push('/chat/1')}
-      />
     </View>
   )
 }

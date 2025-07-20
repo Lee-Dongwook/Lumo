@@ -4,10 +4,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 type AuthProvider = 'google' | 'naver' | 'apple' | 'email'
 
+interface UserAgreement {
+  terms: boolean
+  privacy: boolean
+}
+
 export interface User {
   id: string
   email: string
   name?: string
+  created_at?: string
+  agreement?: UserAgreement
   supabaseUuid?: string
   profileImageUrl?: string
   authProvider?: AuthProvider

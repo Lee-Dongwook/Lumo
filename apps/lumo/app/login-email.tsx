@@ -43,12 +43,35 @@ export default function EmailLogin() {
       return data
     },
     {
-      onSuccess: (data) => {
-        useUserStore.getState().login({
-          token: data.access_token,
-          user: data.user,
-        })
-        router.replace('/main')
+      onSuccess: async (data) => {
+        const token = data.access_token
+        if (!token) throw new Error('로그인 실패: 토큰이 없습니다.')
+
+        try {
+          const res = await fetch(
+            `${process.env.EXPO_PUBLIC_API_BASE_URL}/api/auth/me`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          )
+
+          if (!res.ok) {
+            throw new Error('사용자 정보를 불러오지 못했습니다.')
+          }
+          const { user } = await res.json()
+
+          console.log(user)
+
+          useUserStore.getState().login({
+            token,
+            user,
+          })
+          router.replace('/main')
+        } catch (err: any) {
+          Alert.alert('로그인 실패', err.message)
+        }
       },
       onError: (err: any) => {
         Alert.alert('로그인 실패', err.message)
