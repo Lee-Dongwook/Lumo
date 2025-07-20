@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   ScrollView,
+  Pressable,
 } from 'react-native'
 import { useRouter } from 'expo-router'
 import {
@@ -56,14 +57,18 @@ export default function Main() {
         scrollEnabled={false}
         style={styles.menuScroll}
       >
-        <View style={styles.menuItem}>
+        <Pressable
+          style={styles.menuItem}
+          onPress={() => router.push('/curriculum')}
+        >
           <MaterialCommunityIcons
             name="book-open-page-variant"
             size={20}
             color="#6C4DFF"
           />
           <Text style={styles.menuText}>커리큘럼</Text>
-        </View>
+        </Pressable>
+
         <View style={styles.menuItem}>
           <MaterialCommunityIcons
             name="newspaper-variant-outline"
