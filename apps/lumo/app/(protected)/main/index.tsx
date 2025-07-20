@@ -13,6 +13,7 @@ import {
   FontAwesome5,
   Entypo,
 } from '@expo/vector-icons'
+import Lumo from '@/assets/images/Lumo.png'
 
 export default function Main() {
   const router = useRouter()
@@ -31,10 +32,7 @@ export default function Main() {
           <Text style={styles.arrow}>{'<'}</Text>
         </TouchableOpacity>
 
-        <Image
-          //   source={require('../assets/character.png')}
-          style={styles.character}
-        />
+        <Image source={Lumo} style={styles.character} />
 
         <TouchableOpacity>
           <Text style={styles.arrow}>{'>'}</Text>
