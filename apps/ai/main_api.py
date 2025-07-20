@@ -4,6 +4,8 @@ from ai.api.routes import router
 from ai.api.auth import router as auth_router
 from ai.api.learning_schedule import router as learning_schedule_router
 from ai.api.sockets.chat import router as chat_socket_router
+from ai.socketio.server import sio_app
+from ai.api import signaling_events
 
 app = FastAPI(
     title="My API",
@@ -24,6 +26,8 @@ app.include_router(router)
 app.include_router(chat_socket_router)
 app.include_router(auth_router)
 app.include_router(learning_schedule_router)
+
+app.mount('/ws', sio_app)
 
 @app.get("/")
 def root():
