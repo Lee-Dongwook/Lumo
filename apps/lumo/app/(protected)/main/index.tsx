@@ -7,7 +7,8 @@ import {
   ScrollView,
   Pressable,
 } from 'react-native'
-import { useRouter } from 'expo-router'
+import { RelativePathString, useRouter } from 'expo-router'
+import { useUserStore } from '@/store/userStore'
 import {
   Ionicons,
   MaterialCommunityIcons,
@@ -18,6 +19,20 @@ import Lumo from '@/assets/images/Lumo.png'
 
 export default function Main() {
   const router = useRouter()
+  const { user } = useUserStore()
+
+  const onPressCall = () => {
+    if (!user) return
+    router.push({
+      pathname: '/call' as RelativePathString,
+      params: {
+        myId: user.id,
+        targetId: 'ai-lumo',
+        isCaller: 'true',
+      },
+    })
+  }
+
   return (
     <ScrollView style={styles.wrapper} contentContainerStyle={styles.container}>
       {/* 말풍선 */}
@@ -42,7 +57,7 @@ export default function Main() {
 
       {/* 전화 / 채팅 버튼 */}
       <View style={styles.actionButtons}>
-        <TouchableOpacity style={styles.callButton}>
+        <TouchableOpacity style={styles.callButton} onPress={onPressCall}>
           <Ionicons name="call" size={24} color="white" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.chatButton}>

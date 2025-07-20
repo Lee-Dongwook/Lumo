@@ -8638,6 +8638,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-av@npm:^15.1.7":
+  version: 15.1.7
+  resolution: "expo-av@npm:15.1.7"
+  peerDependencies:
+    expo: "*"
+    react: "*"
+    react-native: "*"
+    react-native-web: "*"
+  peerDependenciesMeta:
+    react-native-web:
+      optional: true
+  checksum: 10/8f3055b68cac76b627116cf93a63bebdacb8c0d22f630f9fdae7dc74633a945d9a469421fce0f4c345c730eda0d039d78c88e59c09e2219bfde7e259d42981ba
+  languageName: node
+  linkType: hard
+
 "expo-blur@npm:~14.1.5":
   version: 14.1.5
   resolution: "expo-blur@npm:14.1.5"
@@ -11474,6 +11489,7 @@ __metadata:
     expo: "npm:^53.0.12"
     expo-apple-authentication: "npm:^7.2.4"
     expo-auth-session: "npm:~6.2.1"
+    expo-av: "npm:^15.1.7"
     expo-blur: "npm:~14.1.5"
     expo-constants: "npm:~17.1.6"
     expo-crypto: "npm:^14.1.5"

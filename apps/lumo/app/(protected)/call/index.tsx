@@ -6,22 +6,21 @@ import {
   StyleSheet,
   SafeAreaView,
 } from 'react-native'
+import { Audio } from 'expo-av'
+import { useLocalSearchParams } from 'expo-router'
 import { RTCPeerConnection, MediaStream } from 'react-native-webrtc'
 import { socket, joinSocket } from '@/features/socket/socket'
 import { createOffer, createAnswer } from '@/features/socket/signaling'
 import { hangup } from '@/features/socket/call'
 
-interface CallScreenProps {
-  myId: string
-  targetId: string
-  isCaller: boolean
-}
+export default function CallScreen() {
+  const { myId, targetId, isCaller } = useLocalSearchParams() as {
+    myId: string
+    targetId: string
+    isCaller: string
+  }
 
-export default function CallScreen({
-  myId,
-  targetId,
-  isCaller,
-}: CallScreenProps) {
+  const isCallerBool = isCaller === 'true'
   const [connected, setConnected] = useState(false)
   const [timer, setTimer] = useState(0)
   const [muted, setMuted] = useState(false)
@@ -55,7 +54,22 @@ export default function CallScreen({
   useEffect(() => {
     joinSocket(myId)
 
-    if (isCaller) {
+    socket.on('tts_audio', async ({ url, text }) => {
+      console.log('TTS 응답 수신:', text)
+      const { sound } = await Audio.Sound.createAsync(
+        {
+          uri: `http://127.0.0.1:8000${url}`,
+        },
+        { shouldPlay: true },
+      )
+      sound.setOnPlaybackStatusUpdate((status) => {
+        if (!status.isLoaded) {
+          console.warn('🔴 TTS 재생 오류:', status)
+        }
+      })
+    })
+
+    if (isCallerBool) {
       createOffer({
         myId,
         targetId,
