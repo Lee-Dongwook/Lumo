@@ -7,7 +7,9 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  Alert,
 } from 'react-native'
+import { useRouter } from 'expo-router'
 
 interface CurriCulumRenderOption {
   mode: 'single' | 'curriculum'
@@ -36,9 +38,22 @@ const options: Record<CurriCulumRenderOption['mode'], CurriCulumRenderOption> =
   }
 
 export default function CurriculumScreen() {
+  const router = useRouter()
   const [selectedMode, setSelectedMode] = useState<
     CurriCulumRenderOption['mode'] | null
   >(null)
+
+  console.log(selectedMode)
+
+  const handleNext = () => {
+    if (selectedMode === 'single') {
+      router.push('/curriculum/single')
+    } else if (selectedMode === 'curriculum') {
+      router.push('/curriculum/double')
+    } else {
+      Alert.alert('학습 방식을 선택해주세요')
+    }
+  }
 
   const renderOption = ({
     mode,
@@ -107,6 +122,7 @@ export default function CurriculumScreen() {
             styles.nextButton,
             !selectedMode && styles.nextButtonDisabled,
           ]}
+          onPress={handleNext}
           disabled={!selectedMode}
         >
           <Text style={styles.nextButtonText}>다음으로</Text>
