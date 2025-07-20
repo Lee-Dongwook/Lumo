@@ -17,7 +17,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/api/auth/login')
 @router.post('/send-code')
 async def send_code(req: SendCodeRequest):
     try:
-       await send_verification_email(req.email)
+       await send_verification_email(req.email) # type: ignore
        return {'message': "인증번호 전송 완료"}
     
     except Exception as e:

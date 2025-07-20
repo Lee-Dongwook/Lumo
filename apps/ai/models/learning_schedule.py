@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Literal, Optional, List, Union
+from typing import Literal, Optional, List, Union, TypedDict
 from datetime import date, time
 
 class SingleModeMeta(BaseModel):
@@ -17,7 +17,7 @@ class CurriculumModeMeta(BaseModel):
     call_time: int
 
 class LearningScheduleBase(BaseModel):
-    mode: Literal['single','curriculum']
+    mode: str 
     purpose: Optional[str]
     subject: str
     reference_urls: Optional[List[str]] = []
@@ -32,3 +32,17 @@ class LearningScheduleCreate(LearningScheduleBase):
 class LearningScheduleOut(LearningScheduleBase):
     id: str
     user_id: str
+
+class LearningScheduleRow(TypedDict, total=False):
+    id: str
+    user_id: str
+    mode: str
+    purpose: Optional[str]
+    subject: str
+    reference_urls: Optional[List[str]]
+    material_url: Optional[str]
+    material_file: Optional[str]
+    use_research: bool
+    mode_meta: dict
+    inserted_at: str
+    updated_at: str
