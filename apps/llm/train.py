@@ -25,10 +25,10 @@ class SimpleDataset(Dataset):
     
     
 class TinyGPT(nn.Module):
-    def __init__(self, vocab_size, embed_dim=64):
+    def __init__(self, vocab_size, embed_dim=128, num_layers=2, dropout=0.2):
         super().__init__()
         self.embed = nn.Embedding(vocab_size, embed_dim)
-        self.lstm = nn.LSTM(embed_dim, embed_dim, batch_first=True)
+        self.lstm = nn.LSTM(embed_dim, embed_dim, num_layers=num_layers, batch_first=True, dropout=dropout)
         self.fc = nn.Linear(embed_dim, vocab_size)
     
     def forward(self, x):
@@ -38,14 +38,16 @@ class TinyGPT(nn.Module):
         return logits
 
 
-def train(text_path, model_path, epochs=10):
+def train(text_path, model_path, epochs=100):
     text = Path(text_path).read_text()
     dataset = SimpleDataset(text)
     dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
 
-    model = TinyGPT(dataset.vocab_size)
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+    model = TinyGPT(dataset.vocab_size, embed_dim=128, num_layers=2, dropout=0.2)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3)
     loss_fn = nn.CrossEntropyLoss()
+
+    best_loss = float("inf")
 
     for epoch in range(epochs):
         total_loss = 0
@@ -54,13 +56,21 @@ def train(text_path, model_path, epochs=10):
             loss = loss_fn(logits.view(-1, dataset.vocab_size), y.view(-1))
             optimizer.zero_grad()
             loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()
             total_loss += loss.item()
+        
+        avg_loss = total_loss / len(dataloader)
         print(f"Epoch {epoch+1}, Loss: {total_loss:.4f}")
+
+        if avg_loss < best_loss:
+            best_loss = avg_loss
+            os.makedirs(model_path, exist_ok=True)
+            torch.save(model.state_dict(), os.path.join(model_path, "best_model.pt"))
+            print(f"📌 Best model saved at epoch {epoch+1} with loss {best_loss:.4f}")
     
-    os.makedirs(model_path, exist_ok=True)
     torch.save(model.state_dict(), os.path.join(model_path, "model.pt"))
-    print('Model saved!')
+    print('Latest Model saved!')
 
 if __name__ == "__main__":
     train("data/input.txt", "models")

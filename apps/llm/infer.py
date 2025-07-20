@@ -21,6 +21,9 @@ class InferenceEngine:
             next_token_logits = logits[0, -1]
             next_token = torch.argmax(next_token_logits).item()
             input_ids = torch.cat([input_ids, torch.tensor([[next_token]], device=self.device)], dim=1)
+            generate_text = ''.join([self.dataset.itos[i] for i in input_ids[0].tolist()])
+            if "\nUser:" in generate_text[len(prompt):]:
+                break
 
         output = ''.join([self.dataset.itos[i] for i in input_ids[0].tolist()])
         return output
