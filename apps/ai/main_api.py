@@ -9,7 +9,7 @@ from ai.api.learning_schedule import router as learning_schedule_router
 from ai.api.sockets.chat import router as chat_socket_router
 from ai.socketio.server import sio_app
 from ai.api import signaling_events
-from apps.llm import api as llm_api
+# from apps.llm import api as llm_api
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -34,7 +34,7 @@ app.include_router(router)
 app.include_router(chat_socket_router)
 app.include_router(auth_router)
 app.include_router(learning_schedule_router)
-app.include_router(llm_api.router, prefix="/llm")
+# app.include_router(llm_api.router, prefix="/llm")
 
 app.mount('/ws', sio_app)
 app.mount('/static', StaticFiles(directory=STATIC_DIR), name='static')
