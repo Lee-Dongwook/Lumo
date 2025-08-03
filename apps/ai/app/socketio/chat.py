@@ -1,7 +1,7 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
 from app.flows.agent_loop import handle_chat_stream
 from app.middlewares.auth import get_current_user_ws
-from app.supa.client import save_request
+from app.database.supabase_client import save_request
 
 router = APIRouter()
 

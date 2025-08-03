@@ -5,7 +5,7 @@ from passlib.context import CryptContext
 from datetime import datetime
 from app.models.auth import SendCodeRequest, VerifyCodeRequest, SignupRequest, AgreementStatus, AgreementRequest,  LoginRequest
 from app.services.email_service import send_verification_email
-from app.supa.client import supabase
+from app.database.supabase_client import supabase
 from app.core.auth import create_access_token, decode_token
 import traceback
 

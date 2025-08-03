@@ -1,9 +1,9 @@
-from ai.config.settings import SUPABASE_URL, SUPABASE_SERVICE_KEY
+from app.core.settings import settings
 from supabase import create_client
 from datetime import datetime
 import traceback
 
-supabase = create_client(SUPABASE_URL , SUPABASE_SERVICE_KEY) # type: ignore
+supabase = create_client(settings.supabase_url, settings.supabase_key) # type: ignore
 
 def save_request(*, user_id:str, request_type:str, content:dict, response_audio_url: str | None = None , source:str, status:str = 'completed'):
     try:
@@ -36,4 +36,4 @@ def save_request(*, user_id:str, request_type:str, content:dict, response_audio_
             "source": source,
             "request_type": request_type,
             "created_at": datetime.utcnow().isoformat()
-        }).execute()
+        }).execute() 

@@ -1,5 +1,5 @@
 from uuid import uuid4
-from ai.supa.client import supabase
+from app.database.supabase_client import supabase
 
 BUCKET_NAME = "call-responses"
 
@@ -15,4 +15,4 @@ def upload_audio(user_id:str, audio_bytes:bytes) -> str:
         raise RuntimeError(f"Failed to upload audio: {str(e)}")
     
     url = supabase.storage.from_(BUCKET_NAME).get_public_url(file_path)
-    return url
+    return url 

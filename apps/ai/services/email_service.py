@@ -2,8 +2,8 @@ import random
 import string
 import httpx
 from datetime import datetime, timedelta
-from ai.config.settings import RESEND_API_KEY
-from ai.supa.client import supabase
+from app.core.settings import settings
+from app.database.supabase_client import supabase
 
 def generate_code(length=6) -> str:
     return ''.join(random.choices(string.digits, k=length))
@@ -45,14 +45,14 @@ def get_verification_email_html(code: str) -> str:
 
 
 async def send_email_html(to:str, subject:str, html:str):
-    if not RESEND_API_KEY:
+    if not settings.resend_api_key:
         raise Exception("RESEND_API_KEY 환경변수가 없습니다.")
     
     async with httpx.AsyncClient() as client:
         res = await client.post(
             'https://api.resend.com/emails',
             headers={
-                'Authorization': f"Bearer {RESEND_API_KEY}",
+                'Authorization': f"Bearer {settings.resend_api_key}",
                 'Content-Type': 'application/json'
             },
             json={

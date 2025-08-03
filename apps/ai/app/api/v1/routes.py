@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, Form, Depends
-from app.supa.client import supabase, save_request
-from app.supa.storage import upload_audio
+from app.database.supabase_client import supabase, save_request
+from app.database.storage import upload_audio
 from app.pipelines.research_pipeline import run_research_pipeline
 from app.inputs.url_loader import extract_text_from_url
 from app.services.summarizer import summarize

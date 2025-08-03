@@ -1,4 +1,4 @@
-from ai.supa.client import supabase
+from app.database.supabase_client import supabase
 
 def insert_test_user():
     data= {

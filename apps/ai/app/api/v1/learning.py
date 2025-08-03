@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Path
 from app.core.auth import decode_token
 from fastapi.security import OAuth2PasswordBearer
-from app.supa.client import supabase
+from app.database.supabase_client import supabase
 from uuid import uuid4
 from typing import List
 from app.models.learning_schedule import SingleModeMeta, CurriculumModeMeta, LearningScheduleBase, LearningScheduleCreate, LearningScheduleOut, LearningScheduleRow
