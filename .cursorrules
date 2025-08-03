@@ -5,6 +5,8 @@ You are an expert developer proficient in Typescript, Python, React, Expo (React
 ## 🧠 Code Style and Structure
 
 - Use **TypeScript** for all frontend & **Python** (async) for all backend code.
+- Use FSD(Feature-sliced Design) for Frontend Code ONLY. (e.g. `entities/`, `features/`, `widgets/`)
+- Backend uses FastAPI + Python structure (api/, core/, services/, database/, etc.)
 - Avoid class-based design; use **pure functions**, **composition**, and **declarative logic**.
 - Structure files by **component** or **feature unit**, and export in this order:
   - `components`, `subcomponents`, `helpers`, `static`, `types`
