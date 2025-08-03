@@ -1,0 +1,123 @@
+# 📐 Lumo Development Rules
+
+You are an expert developer proficient in Typescript, Python, React, Expo (React Native), Supabase, Turbo (Monorepo Management), i18next, Zustand, Tanstack React Query, FastAPI, LangChain, Langgraph
+
+## 🧠 Code Style and Structure
+
+- Use **TypeScript** for all frontend & **Python** (async) for all backend code.
+- Avoid class-based design; use **pure functions**, **composition**, and **declarative logic**.
+- Structure files by **component** or **feature unit**, and export in this order:
+  - `components`, `subcomponents`, `helpers`, `static`, `types`
+- Prefer iteration and modularization over code duplication.
+- Use descriptive variable names with auxiliary verbs (e.g, `isLoading`, `hasError`).
+- Use **named exports** for functions, components, constants.
+- Directory naming uses **kebab-case** (e.g., `chat-input`, `audio-player`).
+- Co-locate styles with components in React Native.
+
+---
+
+## 🧱 TypeScript Usage (Frontend)
+
+- Use `interface` for props and data shapes.
+- Avoid `enum`; use `as const` with string literal unions or map objects.
+- Prefer `function` keyword for top-level pure functions.
+- Use descriptive names with intent (e.g., `hasAudio`, `isStreaming`, `shouldLoadTTS`).
+
+---
+
+## 🎨 UI and Styling (Frontend)
+
+- Use `StyleSheet.create` for React Native styles.
+- Implement **mobile-first**, responsive layouts.
+- Web & native style consistency is prioritized.
+- Avoid inline styles unless dynamic.
+
+---
+
+## ⚛️ State and Data Fetching (Frontend)
+
+- **Zustand** is the preferred state management library (with persist where needed).
+- Use **TanStack React Query** for all data fetching, caching, and mutations.
+- Avoid redundant `useEffect`; prefer **derived state**, selectors, and stable callbacks.
+
+---
+
+## 🌍 Internationalization (Frontend)
+
+- Use `i18next` (web) and `expo-localization` + `react-i18next` (native).
+- All UI-visible strings must be localized.
+- Translation keys must follow: `feature.key.label` pattern.
+
+---
+
+## ⚠️ Error Handling & Validation
+
+- Handle error cases early using **guard clauses**.
+- Return early for preconditions; avoid deep nesting.
+- All network errors are wrapped with custom messages or `ErrorBoundary`.
+- Validate user input using `zod` (TS) or `pydantic` (Python).
+- Backend APIs return standardized error shape `{ message, code, details? }`.
+
+---
+
+## 🧠 AI & LLM Integration (Critical)
+
+### 🔁 Inference & Conversation Engine
+
+- All AI flows are stream-based (chunked response over HTTP or WebRTC).
+- Use **FastAPI** for server endpoints.
+- Implement core logic using **LangChain Expression Language** and **LangGraph** for multi-agent orchestration.
+
+### 🔊 WebRTC Audio Handling
+
+- Use `aiortc` to handle inbound WebRTC audio tracks.
+- Stream audio → Whisper → LangChain Agent → TTS → WebRTC outbound.
+- Use `queue.Queue` or `asyncio.Queue` to manage audio frame pipelines.
+
+### 🧪 Prompt & Model Handling
+
+- Prompts must be versioned and stored in `apps/ai/prompts/`.
+- Models are dynamically selected based on session metadata (user level, mode, etc.).
+- Every tool used in a chain must be registered with a unique `tool_id`.
+
+---
+
+## 🚀 Monorepo Rules (Turbo)
+
+- Use `turbo.json` for all build/test/dev workflows.
+- All shared logic resides in `packages/`.
+- Never import `apps/*` code across boundaries.
+- Use workspace-alias imports (`import { x } from 'shared/utils'`).
+
+---
+
+## 🧪 Testing and QA
+
+- Write unit tests for components, hooks, and utils.
+- Use `@testing-library/react` or `vitest` for frontend, `pytest` for backend.
+- Each AI pipeline should have at least:
+  - prompt test
+  - tool test
+  - agent graph test
+
+---
+
+## 🧾 Commit & Branch Convention
+
+- Commit messages follow: `type(scope): message`
+  - e.g., `feat(ai): add langgraph agent for research mode`
+- Feature branches: `feature/<scope>-<description>`
+- PR titles and descriptions must include:
+  - What was done
+  - Why it matters
+  - Screenshots or logs (if visual/loggable)
+
+---
+
+## ❌ Strictly Forbidden
+
+- `any`, `@ts-ignore`, `console.log` in committed code
+- Cross-import between `apps/*`
+- `enum` declarations (use union types or map instead)
+- Long `useEffect` chains without cleanup
+- AI 응답 파이프라인에서 동기 TTS 호출 (blocking)
