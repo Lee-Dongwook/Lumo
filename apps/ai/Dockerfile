@@ -9,4 +9,5 @@ COPY . .
 
 ENV PYTHONPATH=/app
 
-CMD ["uvicorn", "main_api:app", "--host", "0.0.0.0", "--port", "8000"]
+# 새로운 앱 구조에 맞게 진입점 변경
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
