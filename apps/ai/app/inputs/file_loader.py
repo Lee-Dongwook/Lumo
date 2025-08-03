@@ -5,7 +5,7 @@ File Loader
 
 from typing import Dict, Any, Optional
 from pathlib import Path
-# from app.services.extractor import extract_text
+from app.services.extractor import extract_key_information
 
 
 class FileLoader:

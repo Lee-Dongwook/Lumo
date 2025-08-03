@@ -7,9 +7,9 @@ from typing import Dict, Any, Optional
 from app.inputs.file_loader import FileLoader
 from app.inputs.url_loader import URLLoader
 from app.pipelines.utils import TextProcessor
-# from app.services.extractor import extract_text
-# from app.services.summarizer import summarize
-# from app.services.citation_finder import attach_citations
+from app.services.extractor import extract_key_information
+from app.services.summarizer import summarize
+from app.services.citation_finder import attach_citations
 
 
 class ResearchPipeline:

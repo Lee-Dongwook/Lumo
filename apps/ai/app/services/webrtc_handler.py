@@ -41,4 +41,4 @@ def transcribe_wav(path: str) -> str:
     finally:
         # 예외 여부와 상관없이 파일 삭제
         if os.path.exists(path):
-            os.remove(path)
+            os.remove(path) 

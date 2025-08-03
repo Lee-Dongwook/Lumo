@@ -1,6 +1,6 @@
 from langchain.tools import Tool
 # from langchain_community.utilities import SerpAPIWrapper
-# from app.services.summarizer import summarize
+from app.services.summarizer import summarize
 from app.tools.code import get_code_tools
 
 

@@ -1,12 +1,12 @@
-from ai.services.extractor import extract_text
-from ai.services.summarizer import summarize
-from ai.services.citation_finder import attach_citations
+from app.services.extractor import extract_key_information
+from app.services.summarizer import summarize
+from app.services.citation_finder import attach_citations
 
 def run_research_pipeline(input_path:str,input_type:str):
     """
     End-to-end pipeline: Extract -> Summarize -> Cite
     """
-    text = extract_text(input_path, input_type)
+    text = extract_key_information(input_path, input_type)
     summary = summarize(text)
     summary_with_citations = attach_citations(summary, text)
 

@@ -7,9 +7,9 @@ from typing import List, Dict, Any, Optional
 from app.inputs.url_loader import URLLoader
 from app.inputs.keyword_handler import KeywordHandler
 from app.pipelines.utils import TextProcessor
-# from app.services.url_crawler import google_search
-# from app.services.summarizer import summarize
-# from app.services.citation_finder import attach_citations
+from app.services.url_crawler import crawl_url
+from app.services.summarizer import summarize
+from app.services.citation_finder import attach_citations
 
 
 class KeywordPipeline:

@@ -1,4 +1,4 @@
-from ai.services.call_handler import CallHandler
+from app.services.call_handler import CallHandler
 
 if __name__ == "__main__":
     handler = CallHandler(voice_id="YOUR_ELEVENLABS_VOICE_ID")
