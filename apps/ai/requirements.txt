@@ -32,6 +32,8 @@ resend>=0.6.0
 
 # Environment & Utilities
 python-dotenv>=1.0.0
+pydantic>=2.7.0
+pydantic-settings>=2.0.0
 
 # Code Analysis & Testing
 pytest>=7.4.0

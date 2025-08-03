@@ -1,9 +1,9 @@
-import os
-from dotenv import load_dotenv
+# This file is deprecated. Use core.settings instead.
+from .settings import settings
 
-load_dotenv()
-
+# Backward compatibility
 class Settings:
-    JWT_SECRET: str = os.getenv("JWT_SECRET", "changeme")
+    JWT_SECRET: str = settings.jwt_secret
 
-settings = Settings()
+# Keep the old interface for backward compatibility
+settings_old = Settings()
