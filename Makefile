@@ -1,5 +1,5 @@
 install:
-	pip install -r requirements.txt
+	cd apps/ai && pip install -r requirements.txt
 
 dev:
 	cd apps/ai && PYTHONPATH=. uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
