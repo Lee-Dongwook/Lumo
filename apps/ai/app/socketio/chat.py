@@ -1,7 +1,7 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
-from ai.flows.agent_loop import handle_chat_stream
-from ai.middlewares.auth_guard import get_current_user_ws
-from ai.supa.client import save_request
+from app.flows.agent_loop import handle_chat_stream
+from app.middlewares.auth import get_current_user_ws
+from app.supa.client import save_request
 
 router = APIRouter()
 
@@ -26,4 +26,4 @@ async def chat_websocket(websocket:WebSocket):
            content={"response": full_response}
          ) 
     except WebSocketDisconnect:
-        print("WebSocket disconnected")
+        print("WebSocket disconnected") 

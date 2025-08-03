@@ -1,9 +1,9 @@
 import os
 from shutil import copyfile
-from ai.socketio.server import sio
-from ai.socketio.webrtc_handler import track_to_wav, transcribe_wav
-from ai.socketio.gpt_mock_response import generate_mock_response
-from ai.socketio.tts_emit import synthesize_tts_gtts
+from app.services.socketio_server import sio
+from app.services.webrtc_handler import track_to_wav, transcribe_wav
+from app.services.gpt_mock_response import generate_mock_response
+from app.services.tts_emit import synthesize_tts_gtts
 from aiortc import RTCPeerConnection, RTCSessionDescription
 
 
@@ -77,4 +77,4 @@ async def ice_candidate(sid, data):
 
 @sio.event
 async def hangup(sid, data):
-    print(f"Hangup from {data['from']} to {data['to']}")
+    print(f"Hangup from {data['from']} to {data['to']}") 

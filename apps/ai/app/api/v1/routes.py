@@ -1,13 +1,13 @@
 from fastapi import APIRouter, UploadFile, File, Form, Depends
-from ai.supa.client import supabase, save_request
-from ai.supa.storage import upload_audio
-from ai.pipelines.research_pipeline import run_research_pipeline
-from ai.inputs.url_loader import extract_text_from_url
-from ai.services.summarizer import summarize
-from ai.services.citation_finder import attach_citations
-from ai.pipelines.keyword_pipeline import run_keyword_pipeline
-from ai.flows.agent_loop import handle_call
-from ai.middlewares.auth_guard import get_current_user
+from app.supa.client import supabase, save_request
+from app.supa.storage import upload_audio
+from app.pipelines.research_pipeline import run_research_pipeline
+from app.inputs.url_loader import extract_text_from_url
+from app.services.summarizer import summarize
+from app.services.citation_finder import attach_citations
+from app.pipelines.keyword_pipeline import run_keyword_pipeline
+from app.flows.agent_loop import handle_call
+from app.middlewares.auth import get_current_user
 import base64
 
 router = APIRouter(
@@ -78,4 +78,4 @@ async def call_endpoint(file:UploadFile, user=Depends(get_current_user)):
     return {
         "response_audio_base64": base64.b64encode(audio_response).decode('utf-8'),
         "response_audio_url":audio_url
-    }
+    } 
