@@ -26,3 +26,10 @@ export interface LearningScheduleBase {
   use_research?: boolean
   mode_meta: SingleMeta | CurriculumMeta
 }
+
+export interface LearningSchedule extends LearningScheduleBase {
+  id: string
+  user_id: string
+  created_at: string
+  updated_at?: string
+}
