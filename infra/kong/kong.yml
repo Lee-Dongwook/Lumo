@@ -1,0 +1,56 @@
+_format_version: '3.0'
+_transform: true
+
+services:
+  - name: ai-service
+    url: http://lumo-ai:8000
+    routes:
+      - name: ai-route
+        paths:
+          - /api
+        strip_path: true
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 100
+          hour: 1000
+      - name: cors
+        config:
+          origins: ['*']
+          methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+          headers: ['Content-Type', 'Authorization']
+          exposed_headers: ['X-Custom-Header']
+          credentials: true
+          max_age: 3600
+
+  - name: admin-service
+    url: http://lumo-admin:3000
+    routes:
+      - name: admin-route
+        paths:
+          - /admin
+        strip_path: true
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 50
+          hour: 500
+      - name: cors
+        config:
+          origins: ['*']
+          methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+          headers: ['Content-Type', 'Authorization']
+          exposed_headers: ['X-Custom-Header']
+          credentials: true
+          max_age: 3600
+
+consumers:
+  - username: admin-user
+    keyauth_credentials:
+      - key: admin-key-123
+
+plugins:
+  - name: key-auth
+    config:
+      key_names: ['apikey']
+      hide_credentials: true
