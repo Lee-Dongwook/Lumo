@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { useRouter } from 'expo-router'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/shared/api'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useUserStore } from '@/store/userStore'
 import type { OAuthProvider } from '@/features/auth/api/signIn'

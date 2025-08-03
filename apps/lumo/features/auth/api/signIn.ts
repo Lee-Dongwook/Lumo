@@ -1,11 +1,11 @@
 import * as WebBrowser from 'expo-web-browser'
 import * as Linking from 'expo-linking'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/shared/api'
 
 import { AuthProvider } from '@/entities/user'
 
-export type OAuthProvider = AuthProvider
+export type OAuthProvider = Extract<AuthProvider, 'google' | 'apple'>
 
 export const handleOAuthLogin = async (provider: OAuthProvider) => {
   const redirectTo = Linking.createURL('/auth/callback')

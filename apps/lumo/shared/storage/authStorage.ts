@@ -15,4 +15,4 @@ export const asyncAuthStorage = {
   removeSession: async () => {
     await AsyncStorage.removeItem('supabase-session')
   },
-}
+} 

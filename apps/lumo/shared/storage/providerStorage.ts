@@ -5,4 +5,4 @@ const KEY = 'auth_provider'
 export const saveAuthProvider = (provider: string) =>
   AsyncStorage.setItem(KEY, provider)
 export const getAuthProvider = () => AsyncStorage.getItem(KEY)
-export const clearAuthProvider = () => AsyncStorage.removeItem(KEY)
+export const clearAuthProvider = () => AsyncStorage.removeItem(KEY) 
